@@ -1,10 +1,10 @@
 { lib
 , linuxKernel
 , linux_6_6
-, copyPathToStore
+, linux_latest
 , ...
 }:
-let
+rec {
   kernelPatches = [
     {
       # Cold boot PCIe/NVMe have stability issues.
@@ -24,12 +24,7 @@ let
     }
   ];
 
-  linux_bpir3_6_6 = linux_6_6.override {
-    inherit kernelPatches;
-
-    ignoreConfigErrors = false;
-    # there's probably more enabled-by-default configs that are better left disabled, but whatever
-    structuredExtraConfig = with lib.kernel; {
+  bpir3_config_6_x = with lib.kernel; {
       /* "Select this option if you are building a kernel for a server or
           scientific/computation system, or if you want to maximize the
           raw processing power of the kernel, irrespective of scheduling
@@ -251,15 +246,21 @@ let
       XEN_BALLOON_MEMORY_HOTPLUG.tristate = lib.mkForce null; XEN_DOM0.tristate = lib.mkForce null; XEN_EFI.tristate = lib.mkForce null;
       XEN_HAVE_PVMMU.tristate = lib.mkForce null; XEN_MCE_LOG.tristate = lib.mkForce null; XEN_PVH.tristate = lib.mkForce null;
       XEN_PVHVM.tristate = lib.mkForce null; XEN_SAVE_RESTORE.tristate = lib.mkForce null; XEN_SYS_HYPERVISOR.tristate = lib.mkForce null;
-    };
   };
 
-  linuxPackages_bpir3_6_6 = linuxKernel.packagesFor linux_bpir3_6_6;
-in
-{
-  inherit
-    linuxPackages_bpir3_6_6
-    ;
+  linuxPackages_bpir3_6_6 = linuxKernel.packagesFor (linux_6_6.override {
+    inherit kernelPatches;
+    ignoreConfigErrors = false;
+    # there's probably more enabled-by-default configs that are better left disabled, but whatever
+    structuredExtraConfig = bpir3_config_6_x;
+  });
+
+  linuxPackages_bpir3_latest = linuxKernel.packagesFor (linux_latest.override {
+    inherit kernelPatches;
+    ignoreConfigErrors = false;
+    # there's probably more enabled-by-default configs that are better left disabled, but whatever
+    structuredExtraConfig = bpir3_config_6_x;
+  });
 
   linuxPackages_bpir3 = linuxPackages_bpir3_6_6;
 }
