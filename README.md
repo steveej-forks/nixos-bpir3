@@ -1,6 +1,6 @@
 # NixOS on BPi-R3
 
-This respository contains community supported patches that are necessary to run NixOS on BananaPi-R3 and use it as a fully fledget router.
+This respository contains community supported patches that are necessary to run NixOS on BananaPi-R3 and use it as a fully fledged router.
 
 ## Getting started
 
