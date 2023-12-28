@@ -6,26 +6,17 @@ This respository contains community supported patches that are necessary to run 
 
 Build an SD-Image with:
 
-```
+```sh
 $ nix build -L '.#nixosConfigurations.bpir3.config.system.build.sdImage'
 ```
 
 ## Features
 
-wifi:
-
-- [x] 2.4 Ghz
-- [x] 5 Ghz
-  - [x] 160 MHz channel width
-  - [x] beam forming
-- [x] dual radios
-- [ ] Wireless Event Dispatcher (WED) (see #2)
-- [ ] vlans
-
-ethernet:
-
-- [x] hardware offloading
-- [x] vlans
+| feature                   | kernel | nixos                                                                                        |
+| ------------------------- | ------ | -------------------------------------------------------------------------------------------- |
+| dual radios               | [x]    | [x] (via hostapd)                                                                            |
+| Hardware acceleration     | [x]    | [x] ([flow offloading](https://www.kernel.org/doc/html/latest/networking/nf_flowtable.html)) |
+| Wireless Event Dispatcher | #2     | ?                                                                                            |
 
 ## u-boot
 
