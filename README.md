@@ -12,11 +12,11 @@ $ nix build -L '.#nixosConfigurations.bpir3.config.system.build.sdImage'
 
 ## Features
 
-| feature                   | kernel | nixos                                                                                       |
-| ------------------------- | ------ | ------------------------------------------------------------------------------------------- |
-| dual radios               | ✔️     | ✔️ (via hostapd)                                                                            |
-| Hardware acceleration     | ✔️     | ✔️ ([flow offloading](https://www.kernel.org/doc/html/latest/networking/nf_flowtable.html)) |
-| Wireless Event Dispatcher | #2     | ?                                                                                           |
+| feature                   | kernel                                                | nixos                                                                                       |
+| ------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| dual radios               | ✔️                                                    | ✔️ (via hostapd)                                                                            |
+| Hardware acceleration     | ✔️                                                    | ✔️ ([flow offloading](https://www.kernel.org/doc/html/latest/networking/nf_flowtable.html)) |
+| Wireless Event Dispatcher | https://github.com/steveej-forks/nixos-bpir3/issues/2 | ?                                                                                           |
 
 ## u-boot
 
