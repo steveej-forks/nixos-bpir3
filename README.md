@@ -18,6 +18,11 @@ $ nix build -L '.#nixosConfigurations.bpir3.config.system.build.sdImage'
 | Hardware acceleration     | ✔️                                                    | ✔️ ([flow offloading](https://www.kernel.org/doc/html/latest/networking/nf_flowtable.html)) |
 | Wireless Event Dispatcher | https://github.com/steveej-forks/nixos-bpir3/issues/2 | ?                                                                                           |
 
+## Known issues
+
+1. [wifi doesn't work when using uart adapter](https://github.com/openwrt/mt76/issues/702)
+2. some devices have on of the thermal sensor not calibrated
+
 ## u-boot
 
 ### u-boot patches
