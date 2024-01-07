@@ -21,7 +21,7 @@ $ nix build -L '.#nixosConfigurations.bpir3.config.system.build.sdImage'
 ## Known issues
 
 1. [wifi doesn't work when using uart adapter](https://github.com/openwrt/mt76/issues/702)
-2. some devices have on of the thermal sensor not calibrated
+2. [some devices report incorrect temperature for 2.4 GHz chip](https://github.com/openwrt/mt76/issues/729)
 
 ## u-boot
 
