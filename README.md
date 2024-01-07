@@ -23,26 +23,13 @@ $ nix build -L '.#nixosConfigurations.bpir3.config.system.build.sdImage'
 1. [wifi doesn't work when using uart adapter](https://github.com/openwrt/mt76/issues/702)
 2. [some devices report incorrect temperature for 2.4 GHz chip](https://github.com/openwrt/mt76/issues/729)
 
-## u-boot
-
-### u-boot patches
-
-Deriving random static MAC addresses for interfaces is done via patches
-applied in the custom u-boot of this repository. This can be pulled in as
-an input if desired.
-
-```nix
-{
-  inputs = {
-    bpir3.url = "github:nakato/nixos-bpir3-example";
-  };
-
-  # And used somewhere
-  firmware = bpir3.packages.aarch64-linux.armTrustedFirmwareMT7986;
-}
-```
-
-## real configs
+## Real configs
 
 - https://github.com/ghostbuster91/nixos-router
   (bridge eth ports, hw offload, dnsmasq, prometheus, promtail, sops)
+
+## Resources
+
+- [Official forum](https://forum.banana-pi.org/c/banana-pi-bpi-r3/62)
+- [NixOS based router Part 1](https://github.com/ghostbuster91/blogposts/blob/main/router2023/main.md)
+- [NixOS based router Part 2](https://github.com/ghostbuster91/blogposts/blob/main/router2023-part2/main.md)
