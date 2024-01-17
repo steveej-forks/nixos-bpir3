@@ -1,43 +1,35 @@
-# NixOS on BPi-R3 Example
+# NixOS on BPi-R3
 
-This is an example of booting NixOS on a BPi-R3.
+This respository contains community supported patches that are necessary to run NixOS on BananaPi-R3 and use it as a fully fledged router.
+
+## Getting started
 
 Build an SD-Image with:
 
-```
+```sh
 $ nix build -L '.#nixosConfigurations.bpir3.config.system.build.sdImage'
 ```
 
+## Features
 
-## u-boot
+| feature                   | kernel                                                | nixos                                                                                       |
+| ------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| dual radios               | ✔️                                                    | ✔️ (via hostapd)                                                                            |
+| Hardware acceleration     | ✔️                                                    | ✔️ ([flow offloading](https://www.kernel.org/doc/html/latest/networking/nf_flowtable.html)) |
+| Wireless Event Dispatcher | https://github.com/steveej-forks/nixos-bpir3/issues/2 | ?                                                                                           |
 
-### u-boot patches
+## Known issues
 
-Deriving random static MAC addresses for interfaces is done via patches
-applied in the custom u-boot of this repository.  This can be pulled in as
-an input if desired.
+1. [wifi doesn't work when using uart adapter](https://github.com/openwrt/mt76/issues/702)
+2. [some devices report incorrect temperature for 2.4 GHz chip](https://github.com/openwrt/mt76/issues/729)
 
-```nix
-{
-  inputs = {
-    bpir3.url = "github:nakato/nixos-bpir3-example";
-  };
+## Real configs
 
-  # And used somewhere
-  firmware = bpir3.packages.aarch64-linux.armTrustedFirmwareMT7986;
-}
-```
+- https://github.com/ghostbuster91/nixos-router
+  (bridge eth ports, hw offload, dnsmasq, prometheus, promtail, sops)
 
-### Notes on upgrading u-boot
+## Resources
 
-Updated u-boot builds use bootstd instead of distroboot to achieve extlinux
-booting.  This change requires an update to the partition table of the SD
-card.
-
-```
-# nix shell nixpkgs#gptfdisk
-# sgdisk -t 4:8300 -t 5:EF00 /dev/mmcblk0
-```
-
-After this is completed, `bl2.img` can be written to parition 1, and
-`fip.bin` to partition 4.
+- [Official forum](https://forum.banana-pi.org/c/banana-pi-bpi-r3/62)
+- [NixOS based router Part 1](https://github.com/ghostbuster91/blogposts/blob/main/router2023/main.md)
+- [NixOS based router Part 2](https://github.com/ghostbuster91/blogposts/blob/main/router2023-part2/main.md)
