@@ -95,7 +95,7 @@
                '';
             })
             ({lib, ...}: {
-              system.stateVersion = lib.mkDefault "22.11";
+              system.stateVersion = lib.mkDefault "24.05";
               networking.hostName = "bpir3";
 
               networking.useDHCP = false;
