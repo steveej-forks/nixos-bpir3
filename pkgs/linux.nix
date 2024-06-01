@@ -35,7 +35,7 @@ rec {
       PREEMPT = no;
 
       CPU_FREQ_GOV_ONDEMAND = yes;
-      CPU_FREQ_DEFAULT_GOV_ONDEMAND = yes;
+      CPU_FREQ_DEFAULT_GOV_ONDEMAND = lib.mkForce yes;
       CPU_FREQ_DEFAULT_GOV_PERFORMANCE = lib.mkForce no;
       CPU_FREQ_GOV_CONSERVATIVE = yes;
       # disable virtualisation stuff
