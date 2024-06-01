@@ -148,7 +148,7 @@ rec {
 
       # hardware specific stuff
       FB = lib.mkForce no;
-      DRM = no;
+      DRM.tristate = lib.mkForce null;
       SOUND = no;
       INFINIBAND = lib.mkForce no;
       CFG80211 = module;
